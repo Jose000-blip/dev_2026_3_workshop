@@ -11,7 +11,7 @@ class Data:
     def eliminar_duplicados(self, lista):
         resultado = []
         for x in lista:
-            if x not in resultado:
+            if not any(type(x) == type(v) and x == v for v in resultado):
                 resultado.append(x)
         return resultado
 
@@ -22,7 +22,9 @@ class Data:
         if not lista:
             return []
         n = n % len(lista)
-        return lista[n:] + lista[:n]
+        if n == 0:
+            return lista[:]
+        return lista[-n:] + lista[:-n]
 
     def encuentra_numero_faltante(self, lista):
         n = len(lista) + 1
